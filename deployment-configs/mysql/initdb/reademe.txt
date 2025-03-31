@@ -1,0 +1,10 @@
+All scripts with the .sql suffix in this directory
+will be automatically executed after the Docker container starts.
+
+If execution order is required, files can be named with a numeric prefix,
+such as:
+
+001_create_table.sql
+002_insert_data.sql
+
+Files with smaller numbers will be executed first.

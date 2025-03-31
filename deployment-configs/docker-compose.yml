@@ -1,0 +1,107 @@
+services:
+  mysql:
+    container_name: lcsk42-mysql
+    build:
+      context: ./mysql
+    image: lcsk42-mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/log:/var/log/mysql
+    command: --default-authentication-plugin=mysql_native_password
+      --lower_case_table_names=1
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root-password'
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysql",
+          "-u",
+          "root",
+          "-proot-password",
+          "-e",
+          "select 1"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  redis:
+    container_name: lcsk42-redis
+    build:
+      context: ./redis
+    image: lcsk42-redis:5.0.14
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/config/redis.conf
+      - ./redis/log:/var/log/redis
+    command: [ "redis-server", "/config/redis.conf" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  nacos:
+    container_name: lcsk42-nacos
+    build:
+      context: ./nacos
+    image: lcsk42-nacos:v2.2.0-slim
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      PREFER_HOST_MODE: ip
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: nacos
+      MYSQL_SERVICE_PASSWORD: "nacos-password"
+      MYSQL_SERVICE_DB_PARAM: "characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true"
+    volumes:
+      - ./nacos/logs/:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8848/nacos/v1/console/health/readiness"
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  rabbitmq:
+    container_name: lcsk42-rabbitmq
+    build:
+      context: ./rabbitmq
+    image: lcsk42-rabbitmq:3.13-management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: rabbit
+      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+      - ./rabbitmq/log:/var/log/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 3s
+      retries: 5
