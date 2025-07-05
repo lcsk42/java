@@ -12,6 +12,7 @@
         <module>convention</module>
         <module>design-pattern</module>
         <module>common</module>
+        <module>cache</module>
     </modules>
 
 

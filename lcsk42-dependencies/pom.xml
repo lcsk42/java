@@ -17,7 +17,7 @@
         <mybatis-spring-boot-starter.version>3.0.4</mybatis-spring-boot-starter.version>
         <mybatis-plus.version>3.5.12</mybatis-plus.version>
         <shardingsphere.version>5.4.1</shardingsphere.version>
-        <redisson.version>3.50.3</redisson.version>
+        <redisson.version>3.50.0</redisson.version>
         <jjwt.version>0.12.6</jjwt.version>
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
         <guava.version>33.4.8-jre</guava.version>
