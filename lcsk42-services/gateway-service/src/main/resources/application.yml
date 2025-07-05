@@ -1,0 +1,22 @@
+server:
+  port: 18080
+spring:
+  application:
+    name: lcsk42-gateway-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos-password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: ${spring.application.name}
