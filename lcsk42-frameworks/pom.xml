@@ -13,6 +13,7 @@
         <module>design-pattern</module>
         <module>common</module>
         <module>cache</module>
+        <module>web</module>
     </modules>
 
 
