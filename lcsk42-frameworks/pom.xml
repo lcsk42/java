@@ -11,6 +11,7 @@
         <module>base</module>
         <module>convention</module>
         <module>design-pattern</module>
+        <module>common</module>
     </modules>
 
 
@@ -24,7 +25,7 @@
         <project.build.outputTimestamp>2025-01-01T00:00:00Z</project.build.outputTimestamp>
         <maven-common-plugin.version>3.1.0</maven-common-plugin.version>
         <lombok.version>1.18.38</lombok.version>
-        <mapstruct.version>1.6.6</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
     </properties>
 
     <dependencies>
