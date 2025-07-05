@@ -37,6 +37,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.lcsk42</groupId>
             <artifactId>lcsk42-common-spring-boot-starter</artifactId>
             <version>${project.version}</version>

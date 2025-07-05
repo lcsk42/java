@@ -9,6 +9,7 @@
 
     <modules>
         <module>gateway-service</module>
+        <module>admin-service</module>
     </modules>
 
     <properties>
