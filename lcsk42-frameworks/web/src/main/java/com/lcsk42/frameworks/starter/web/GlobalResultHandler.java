@@ -77,6 +77,9 @@ public class GlobalResultHandler implements ResponseBodyAdvice<Object> {
         // If the return type is a string, convert it into a JSON result.
         if (returnType.getParameterType().isAssignableFrom(String.class)) {
             String json = JacksonUtil.toJSON(Result.success(body));
+            // Set the content type to application/json.
+            // Because returnType.getParameterType() is String, the default content type will be text/plain.
+            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
             return ObjectUtils.defaultIfNull(json, body.toString());
         }
 

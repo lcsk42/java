@@ -27,6 +27,7 @@
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
         <swagger-annotations-jakarta.version>2.2.19</swagger-annotations-jakarta.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
+        <commons-io.version>2.19.0</commons-io.version>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +96,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
 
             <dependency>
