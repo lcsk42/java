@@ -14,6 +14,9 @@ public final class InitializeDispatcherServletHandler implements CommandLineRunn
     // RestTemplate for making HTTP requests
     private final RestTemplate restTemplate;
 
+    // Port holder to retrieve the server port
+    private final PortHolder portHolder;
+
     // Configurable environment to fetch application properties
     private final ConfigurableEnvironment configurableEnvironment;
 
@@ -26,8 +29,9 @@ public final class InitializeDispatcherServletHandler implements CommandLineRunn
     public void run(String... args) throws Exception {
         // Constructs the URL to call the initialization endpoint
         String url = String.format("http://127.0.0.1:%s%s",
-                configurableEnvironment.getProperty("server.port", "8080") +
-                        configurableEnvironment.getProperty("server.servlet.context-path", ""),
+                portHolder.getPort() +
+                        configurableEnvironment.getProperty("server.servlet.context-path", "") +
+                        "/api",
                 INITIALIZE_PATH);
 
         try {

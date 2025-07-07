@@ -18,6 +18,7 @@ import com.lcsk42.frameworks.starter.web.GlobalExceptionHandler;
 import com.lcsk42.frameworks.starter.web.GlobalResultHandler;
 import com.lcsk42.frameworks.starter.web.initialize.InitializeDispatcherServletController;
 import com.lcsk42.frameworks.starter.web.initialize.InitializeDispatcherServletHandler;
+import com.lcsk42.frameworks.starter.web.initialize.PortHolder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -109,6 +110,15 @@ public class WebAutoConfiguration {
     }
 
     /**
+     * PortHolder bean to hold the web server port.
+     * This is used to initialize the DispatcherServlet early.
+     */
+    @Bean
+    public PortHolder portHolder() {
+        return new PortHolder();
+    }
+
+    /**
      * RestTemplate bean with custom HTTP client factory.
      */
     @Bean
@@ -135,8 +145,10 @@ public class WebAutoConfiguration {
     @Bean
     public InitializeDispatcherServletHandler initializeDispatcherServletHandler(
             RestTemplate simpleRestTemplate,
-            ConfigurableEnvironment configurableEnvironment) {
-        return new InitializeDispatcherServletHandler(simpleRestTemplate, configurableEnvironment);
+            PortHolder portHolder,
+            ConfigurableEnvironment configurableEnvironment
+    ) {
+        return new InitializeDispatcherServletHandler(simpleRestTemplate, portHolder, configurableEnvironment);
     }
 
     /**
