@@ -2,6 +2,8 @@ package com.lcsk42.frameworks.starter.convention.result;
 
 import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.AbstractException;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 @Getter
 @Builder
+@Tag(description = "Response Result", name = "Result")
 public class Result<T> implements Serializable {
     /**
      * Constant representing a successful operation.
@@ -23,22 +26,26 @@ public class Result<T> implements Serializable {
     /**
      * Response code indicating the status of the result.
      */
+    @Schema(description = "Response code indicating the status of the result", example = "200")
     private String code;
 
     /**
      * The actual data returned in the result.
      */
     @SuppressWarnings("squid:S1948")
+    @Schema(description = "The actual data returned in the result")
     private T data;
 
     /**
      * Human-readable message providing more context about the result.
      */
+    @Schema(description = "Human-readable message providing more context about the result", example = "Operation successful")
     private String message;
 
     /**
      * Unique identifier for tracing the request.
      */
+    @Schema(description = "Unique identifier for tracing the request", example = "123e4567-e89b-12d3-a456-426614174000")
     private String requestId;
 
     /**

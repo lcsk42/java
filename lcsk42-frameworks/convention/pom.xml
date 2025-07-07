@@ -8,4 +8,11 @@
     </parent>
 
     <artifactId>lcsk42-convention-spring-boot-starter</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations-jakarta</artifactId>
+        </dependency>
+    </dependencies>
 </project>

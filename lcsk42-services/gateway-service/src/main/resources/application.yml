@@ -11,6 +11,19 @@ spring:
         server-addr: 127.0.0.1:8848
         username: nacos
         password: nacos-password
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          route-id-prefix: lcsk42-gateway-
+      routes:
+        - id: lcsk42-gateway-service
+          uri: lb://lcsk42-gateway-service
+          predicates:
+            - Path=/gateway/**
+          filters:
+            - StripPrefix=1
 
 management:
   endpoints:
@@ -20,3 +33,12 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      enabled: true
+      version: openapi3
