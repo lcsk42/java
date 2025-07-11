@@ -80,7 +80,7 @@ public final class AbstractChainContext<T> implements CommandLineRunner {
             // Sort the handlers based on the order value (Ordered interface)
             List<AbstractChainHandler> actualAbstractChainHandlers = abstractChainHandlers.stream()
                     .sorted(Comparator.comparing(Ordered::getOrder))
-                    .collect(Collectors.toList());
+                    .toList();
 
             // Update the container with the sorted handlers
             abstractChainHandlerContainer.put(bean.getHandlerName(), actualAbstractChainHandlers);

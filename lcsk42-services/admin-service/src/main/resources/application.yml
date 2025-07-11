@@ -32,8 +32,6 @@ management:
     tags:
       application: ${spring.application.name}
 
-knife4j:
-  enable: true
 springdoc:
   api-docs:
     enabled: true

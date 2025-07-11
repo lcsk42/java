@@ -7,10 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Optional;
@@ -30,6 +32,7 @@ public class GlobalExceptionHandler {
      * This will capture errors related to invalid method arguments passed by the client.
      */
     @SneakyThrows
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public Result<Void> validExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException ex) {
         // Extracts the validation error message from the first field error.
@@ -50,6 +53,7 @@ public class GlobalExceptionHandler {
      * Handles exceptions thrown within the application (i.e., AbstractException).
      * This is used for application-specific exceptions, including custom error handling.
      */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {AbstractException.class})
     public Result<Void> abstractException(HttpServletRequest request, AbstractException ex) {
         // Logs the error details, including the exception cause if present.
@@ -67,6 +71,7 @@ public class GlobalExceptionHandler {
      * Handles uncaught exceptions in the application.
      * This will be triggered for unexpected errors or any other exception not caught explicitly.
      */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Throwable.class)
     public Result<Void> defaultErrorHandler(HttpServletRequest request, Throwable throwable) {
         // Logs the uncaught exception.

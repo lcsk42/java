@@ -7,10 +7,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -82,7 +82,10 @@ public class PageResponse<T> implements IPage<T> {
     }
 
     public <R> PageResponse<R> convert(Function<? super T, ? extends R> mapper) {
-        List<R> collect = this.getRecords().stream().map(mapper).collect(Collectors.toList());
+        List<? extends R> mapped = this.getRecords().stream()
+                .map(mapper)
+                .toList();
+        List<R> collect = new ArrayList<>(mapped);
         return PageResponse.<R>builder()
                 .current(this.current)
                 .size(this.size)
