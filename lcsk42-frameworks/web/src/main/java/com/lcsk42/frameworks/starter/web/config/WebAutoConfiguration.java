@@ -155,7 +155,7 @@ public class WebAutoConfiguration {
      * Basic WebMvcConfigurer implementation for future extensibility (e.g., CORS, formatters, interceptors).
      */
     @Bean
-    public WebConfig webConfig() {
-        return new WebConfig();
+    public WebConfiguration webConfig() {
+        return new WebConfiguration();
     }
 }

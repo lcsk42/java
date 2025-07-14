@@ -2,6 +2,7 @@ package com.lcsk42.frameworks.starter.common.convert;
 
 import com.lcsk42.frameworks.starter.common.util.LocalDateTimeUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.mapstruct.InheritInverseConfiguration;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * @param <S> Source type
  * @param <T> Target type
  */
-public interface IStructConverter<S, T> {
+public interface BiConverter<S, T> {
     /**
      * Converts target type (T) to source type (S).
      *
@@ -31,6 +32,7 @@ public interface IStructConverter<S, T> {
      * @param s instance of source type
      * @return converted target type instance
      */
+    @InheritInverseConfiguration
     T toT(S s);
 
     /**
