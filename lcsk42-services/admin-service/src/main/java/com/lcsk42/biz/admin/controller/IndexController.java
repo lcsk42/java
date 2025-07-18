@@ -1,5 +1,6 @@
 package com.lcsk42.biz.admin.controller;
 
+import com.lcsk42.frameworks.starter.convention.exception.ServiceException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,5 +28,17 @@ public class IndexController {
         // This method should return the ID of the currently authenticated user.
         // The actual implementation will depend on your security context and user management.
         return 1L; // Placeholder for demonstration purposes
+    }
+
+    @GetMapping("/void")
+    @Operation(summary = "Void Endpoint")
+    public void nonReturn() {
+
+    }
+
+    @GetMapping("/exception")
+    @Operation(summary = "Exception Endpoint")
+    public void exception() {
+        throw new ServiceException("An error occurred in the IndexController");
     }
 }

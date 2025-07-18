@@ -1,5 +1,6 @@
 package com.lcsk42.biz.gateway.handler;
 
+import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
 import com.lcsk42.frameworks.starter.common.util.JacksonUtil;
 import com.lcsk42.frameworks.starter.convention.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.web.server.ResponseStatusException;
@@ -39,6 +41,14 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         ServerHttpResponse response = exchange.getResponse();
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
+        ServerHttpRequest request = exchange.getRequest();
+        String requestId = request.getHeaders()
+                .getFirst(CustomHttpHeaderConstant.REQUEST_ID_HEADER);
+
+        if (StringUtils.isBlank(requestId)) {
+            requestId = CustomHttpHeaderConstant.getExceptionRequestId();
+        }
+
         StatusMessage statusMessage = switch (ex) {
             case NotFoundException ignored -> {
                 log.error("404 Not Found: {}", ex.getMessage());
@@ -57,10 +67,13 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
 
         response.setStatusCode(statusMessage.code);
 
-        String json = JacksonUtil.toJSON(Result.builder()
-                .code(statusMessage.code.toString())
-                .message(statusMessage.message)
-                .build());
+        String json = JacksonUtil.toJSON(
+                Result.builder()
+                        .code(statusMessage.code.toString())
+                        .message(statusMessage.message)
+                        .build()
+                        .withRequestId(requestId)
+        );
 
         if (StringUtils.isBlank(json)) {
             return response.setComplete();

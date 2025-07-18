@@ -126,4 +126,14 @@ public class Result<T> implements Serializable {
     public boolean isSucceed() {
         return SUCCESS_CODE.equals(code);
     }
+
+    /**
+     * Sets the response id.
+     *
+     * @return the current Result instance for method chaining.
+     */
+    public Result<T> withRequestId(String requestId) {
+        this.requestId = requestId;
+        return this;
+    }
 }

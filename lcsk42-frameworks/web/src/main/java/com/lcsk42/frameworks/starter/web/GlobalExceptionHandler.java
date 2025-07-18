@@ -1,5 +1,6 @@
 package com.lcsk42.frameworks.starter.web;
 
+import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
 import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.AbstractException;
 import com.lcsk42.frameworks.starter.convention.result.Result;
@@ -46,7 +47,7 @@ public class GlobalExceptionHandler {
         log.error(ERROR_LOG_TEMPLATE, request.getMethod(), getUrl(request), exceptionStr);
 
         // Returns a failure result with the error code and message.
-        return Result.failure(BaseErrorCode.CLIENT_ERROR.code(), exceptionStr);
+        return Result.failure(BaseErrorCode.CLIENT_ERROR.code(), exceptionStr).withRequestId(getRequestId(request));
     }
 
     /**
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler {
 
         // Logs the error details without the cause.
         log.error(ERROR_LOG_TEMPLATE, request.getMethod(), request.getRequestURL().toString(), ex.toString());
-        return Result.failure(ex);
+        return Result.failure(ex).withRequestId(getRequestId(request));
     }
 
     /**
@@ -76,7 +77,7 @@ public class GlobalExceptionHandler {
     public Result<Void> defaultErrorHandler(HttpServletRequest request, Throwable throwable) {
         // Logs the uncaught exception.
         log.error(ERROR_LOG_TEMPLATE, request.getMethod(), getUrl(request), throwable.toString(), throwable);
-        return Result.failure();
+        return Result.failure().withRequestId(getRequestId(request));
     }
 
     /**
@@ -87,5 +88,13 @@ public class GlobalExceptionHandler {
             return request.getRequestURL().toString();
         }
         return request.getRequestURL().toString() + "?" + request.getQueryString();
+    }
+
+    private String getRequestId(HttpServletRequest request) {
+        String requestId = request.getHeader(CustomHttpHeaderConstant.REQUEST_ID_HEADER);
+        if (StringUtils.isBlank(requestId)) {
+            requestId = CustomHttpHeaderConstant.getExceptionRequestId();
+        }
+        return requestId;
     }
 }

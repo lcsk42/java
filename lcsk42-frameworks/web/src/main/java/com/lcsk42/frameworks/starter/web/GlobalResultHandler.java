@@ -1,5 +1,6 @@
 package com.lcsk42.frameworks.starter.web;
 
+import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
 import com.lcsk42.frameworks.starter.common.util.JacksonUtil;
 import com.lcsk42.frameworks.starter.convention.result.Result;
 import com.lcsk42.frameworks.starter.web.annotaion.CompatibleOutput;
@@ -68,15 +69,22 @@ public class GlobalResultHandler implements ResponseBodyAdvice<Object> {
      */
     @Override
     public Object beforeBodyWrite(Object body,
-                                  MethodParameter returnType,
+                                  @NonNull MethodParameter returnType,
                                   @NonNull MediaType selectedContentType,
                                   @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NonNull ServerHttpRequest request,
                                   @NonNull ServerHttpResponse response) {
 
+        String requestId = request.getHeaders().getFirst(CustomHttpHeaderConstant.REQUEST_ID_HEADER);
+
+        if (StringUtils.isBlank(requestId)) {
+            // If the request ID is not present, generate a new one.
+            requestId = CustomHttpHeaderConstant.getReturnRequestId();
+        }
+
         // If the return type is a string, convert it into a JSON result.
         if (returnType.getParameterType().isAssignableFrom(String.class)) {
-            String json = JacksonUtil.toJSON(Result.success(body));
+            String json = JacksonUtil.toJSON(Result.success(body).withRequestId(requestId));
             // Set the content type to application/json.
             // Because returnType.getParameterType() is String, the default content type will be text/plain.
             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
@@ -84,6 +92,6 @@ public class GlobalResultHandler implements ResponseBodyAdvice<Object> {
         }
 
         // Otherwise, wrap the body in a Result object.
-        return Result.success(body);
+        return Result.success(body).withRequestId(requestId);
     }
 }
