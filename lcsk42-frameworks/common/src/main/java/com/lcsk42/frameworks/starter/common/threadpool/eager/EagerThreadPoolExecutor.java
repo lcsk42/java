@@ -38,6 +38,10 @@ public class EagerThreadPoolExecutor extends ThreadPoolExecutor {
                                    ThreadFactory threadFactory,
                                    RejectedExecutionHandler handler) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
+
+        if (workQueue instanceof TaskQueue taskQueue) {
+            taskQueue.setExecutor(this);
+        }
     }
 
     /**

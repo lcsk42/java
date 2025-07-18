@@ -26,7 +26,8 @@ public class Result<T> implements Serializable {
     /**
      * Response code indicating the status of the result.
      */
-    @Schema(description = "Response code indicating the status of the result", example = "200")
+    @Schema(description = "Response code indicating the status of the result",
+            example = "200")
     private String code;
 
     /**
@@ -39,13 +40,15 @@ public class Result<T> implements Serializable {
     /**
      * Human-readable message providing more context about the result.
      */
-    @Schema(description = "Human-readable message providing more context about the result", example = "Operation successful")
+    @Schema(description = "Human-readable message providing more context about the result",
+            example = "Operation successful")
     private String message;
 
     /**
      * Unique identifier for tracing the request.
      */
-    @Schema(description = "Unique identifier for tracing the request", example = "123e4567-e89b-12d3-a456-426614174000")
+    @Schema(description = "Unique identifier for tracing the request",
+            example = "123e4567-e89b-12d3-a456-426614174000")
     private String requestId;
 
     /**

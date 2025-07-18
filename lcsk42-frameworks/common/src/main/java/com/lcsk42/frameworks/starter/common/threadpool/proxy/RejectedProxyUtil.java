@@ -59,7 +59,7 @@ public final class RejectedProxyUtil {
         // Submit more tasks than pool can handle to trigger rejections
         for (int i = 0; i < 10; i++) {
             try {
-                threadPoolExecutor.execute(() -> ThreadUtil.sleep(100000L));
+                threadPoolExecutor.execute(() -> ThreadUtil.sleep(100_000L));
             } catch (Exception ignored) {
                 ignored.printStackTrace();
             }

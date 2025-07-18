@@ -64,9 +64,10 @@ public class RemoteException extends AbstractException {
      */
     @Override
     public String toString() {
-        return "RemoteException {" +
-                "code='" + errorCode + "'," +
-                "message='" + errorMessage + "'," +
-                '}';
+        return """
+                RemoteException {
+                    code='%s',
+                    message='%s'
+                }""".formatted(errorCode, errorMessage);
     }
 }

@@ -49,6 +49,8 @@ public class ApplicationAutoConfiguration {
     @Bean
     @Primary
     public Executor taskExecutor() {
-        return ThreadPoolBuilder.builder().threadFactory("default-pool-", false).build();
+        return ThreadPoolBuilder.builder()
+                .threadFactory("default-pool-", false)
+                .build();
     }
 }
