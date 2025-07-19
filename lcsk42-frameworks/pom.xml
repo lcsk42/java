@@ -15,6 +15,7 @@
         <module>cache</module>
         <module>web</module>
         <module>mybatis</module>
+        <module>bizs</module>
     </modules>
 
 

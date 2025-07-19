@@ -25,7 +25,6 @@ public final class CustomHttpHeaderConstant {
      */
     public static final String REQUEST_ID_HEADER = "Request-Id";
 
-
     public static String getGatewayRequestId() {
         return "G-" + UUID.randomUUID();
     }
@@ -35,7 +34,7 @@ public final class CustomHttpHeaderConstant {
     }
 
     public static String getExceptionRequestId() {
-        return "E-" + UUID.randomUUID();
+        return "GE-" + UUID.randomUUID();
     }
 
     /**

@@ -42,3 +42,9 @@ knife4j:
     discover:
       enabled: true
       version: openapi3
+
+
+framework:
+  gateway:
+    allow-list:
+      - method: GET
