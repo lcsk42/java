@@ -4,14 +4,13 @@ import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order
 @Component
 public class GatewayFilter implements GlobalFilter {
 

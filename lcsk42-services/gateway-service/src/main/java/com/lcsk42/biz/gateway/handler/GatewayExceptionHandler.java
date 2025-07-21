@@ -1,15 +1,11 @@
 package com.lcsk42.biz.gateway.handler;
 
-import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
-import com.lcsk42.frameworks.starter.common.util.JacksonUtil;
-import com.lcsk42.frameworks.starter.convention.result.Result;
+import com.lcsk42.biz.gateway.util.ServerUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -20,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 
@@ -42,45 +37,28 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
         ServerHttpRequest request = exchange.getRequest();
-        String requestId = request.getHeaders()
-                .getFirst(CustomHttpHeaderConstant.REQUEST_ID_HEADER);
-
-        if (StringUtils.isBlank(requestId)) {
-            requestId = CustomHttpHeaderConstant.getExceptionRequestId();
-        }
+        String requestId = ServerUtil.getRequestId(request);
 
         StatusMessage statusMessage = switch (ex) {
             case NotFoundException ignored -> {
                 log.error("404 Not Found: {}", ex.getMessage());
-                yield StatusMessage.of(HttpStatus.NOT_FOUND, "Resource not found");
+                yield StatusMessage.of(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase());
             }
             case ResponseStatusException statusException -> {
                 log.error("Response Status Exception: {}", statusException.getMessage());
-                String reason = Optional.ofNullable(statusException.getReason()).orElse("Unknown error");
+                String reason = Optional.ofNullable(statusException.getReason())
+                        .orElse("Unknown error");
                 yield StatusMessage.of(statusException.getStatusCode(), reason);
             }
             default -> {
                 log.error("Internal Server Error: {}", ex.getMessage(), ex);
-                yield StatusMessage.of(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+                yield StatusMessage.of(
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                        HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()
+                );
             }
         };
 
-        response.setStatusCode(statusMessage.code);
-
-        String json = JacksonUtil.toJSON(
-                Result.builder()
-                        .code(statusMessage.code.toString())
-                        .message(statusMessage.message)
-                        .build()
-                        .withRequestId(requestId)
-        );
-
-        if (StringUtils.isBlank(json)) {
-            return response.setComplete();
-        }
-
-        DataBuffer buffer = response.bufferFactory().wrap(json.getBytes(StandardCharsets.UTF_8));
-
-        return response.writeWith(Mono.just(buffer));
+        return ServerUtil.write(response, statusMessage.code, statusMessage.message, requestId);
     }
 }

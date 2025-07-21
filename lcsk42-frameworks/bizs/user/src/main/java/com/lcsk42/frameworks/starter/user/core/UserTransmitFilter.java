@@ -1,5 +1,6 @@
 package com.lcsk42.frameworks.starter.user.core;
 
+import com.lcsk42.frameworks.starter.convention.dto.UserInfoDTO;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

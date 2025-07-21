@@ -80,6 +80,8 @@ public class GlobalResultHandler implements ResponseBodyAdvice<Object> {
         if (StringUtils.isBlank(requestId)) {
             // If the request ID is not present, generate a new one.
             requestId = CustomHttpHeaderConstant.getReturnRequestId();
+        } else {
+            requestId = CustomHttpHeaderConstant.getClientRequestId(requestId);
         }
 
         // If the return type is a string, convert it into a JSON result.

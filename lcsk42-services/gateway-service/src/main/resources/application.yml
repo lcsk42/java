@@ -47,4 +47,4 @@ knife4j:
 framework:
   gateway:
     allow-list:
-      - method: GET
+      - path: /lcsk42-*-service/v3/api-docs

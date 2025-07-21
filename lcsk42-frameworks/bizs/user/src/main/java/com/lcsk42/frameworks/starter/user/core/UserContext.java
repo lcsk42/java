@@ -1,6 +1,7 @@
 package com.lcsk42.frameworks.starter.user.core;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
+import com.lcsk42.frameworks.starter.convention.dto.UserInfoDTO;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -1,9 +1,8 @@
-package com.lcsk42.frameworks.starter.user.util;
+package com.lcsk42.frameworks.starter.common.util;
 
-import com.lcsk42.frameworks.starter.common.util.JacksonUtil;
-import com.lcsk42.frameworks.starter.user.core.UserInfoDTO;
+import com.lcsk42.frameworks.starter.convention.dto.UserInfoDTO;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AccessLevel;
@@ -17,7 +16,7 @@ import java.util.Date;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class JWTUtil {
+public final class JwtUtil {
 
     private static final long EXPIRATION = 60 * 60 * 24L;
 
@@ -41,6 +40,7 @@ public final class JWTUtil {
     }
 
     public static UserInfoDTO parseJwtToken(String jwtToken) {
+
         if (StringUtils.hasText(jwtToken)) {
             String actualJwtToken = jwtToken.replace(TOKEN_PREFIX, "");
             try {
@@ -56,9 +56,10 @@ public final class JWTUtil {
                     String subject = claims.getSubject();
                     return JacksonUtil.fromJson(subject, UserInfoDTO.class);
                 }
-            } catch (ExpiredJwtException ignored) {
+            } catch (JwtException ex) {
+                log.warn("JWT token is invalid: {}", ex.getMessage());
             } catch (Exception ex) {
-                log.error("JWT Token解析失败，请检查", ex);
+                log.error("Unexpected error during JWT parsing", ex);
             }
         }
         return null;

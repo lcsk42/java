@@ -1,4 +1,4 @@
-package com.lcsk42.frameworks.starter.user.core;
+package com.lcsk42.frameworks.starter.convention.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

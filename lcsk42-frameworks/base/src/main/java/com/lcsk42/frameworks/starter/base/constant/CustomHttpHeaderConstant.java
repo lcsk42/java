@@ -25,6 +25,10 @@ public final class CustomHttpHeaderConstant {
      */
     public static final String REQUEST_ID_HEADER = "Request-Id";
 
+    public static String getClientRequestId(String requestId) {
+        return "C-" + requestId;
+    }
+
     public static String getGatewayRequestId() {
         return "G-" + UUID.randomUUID();
     }
