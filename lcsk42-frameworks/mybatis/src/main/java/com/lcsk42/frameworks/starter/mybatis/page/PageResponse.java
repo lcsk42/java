@@ -21,17 +21,17 @@ public class PageResponse<T> implements IPage<T> {
     /**
      * Current page
      */
-    private Long current;
+    private long current;
 
     /**
      * Number of items displayed per page
      */
-    private Long size = 10L;
+    private long size = 10L;
 
     /**
      * Total
      */
-    private Long total;
+    private long total;
 
     /**
      * Query data list
