@@ -16,14 +16,6 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-          route-id-prefix: lcsk42-gateway-
-      routes:
-        - id: lcsk42-gateway-service
-          uri: lb://lcsk42-gateway-service
-          predicates:
-            - Path=/gateway/**
-          filters:
-            - StripPrefix=1
 
 management:
   endpoints:
@@ -51,3 +43,5 @@ framework:
   gateway:
     allow-list:
       - path: /lcsk42-*-service/v3/api-docs
+      - path: /lcsk42-admin-service/**
+        method: GET
