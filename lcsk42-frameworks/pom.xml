@@ -19,5 +19,6 @@
         <module>web</module>
         <module>mybatis</module>
         <module>bizs</module>
+        <module>rocketmq</module>
     </modules>
 </project>

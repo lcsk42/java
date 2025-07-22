@@ -28,6 +28,7 @@
         <swagger-annotations-jakarta.version>2.2.19</swagger-annotations-jakarta.version>
         <commons-collections4.version>4.5.0</commons-collections4.version>
         <commons-io.version>2.19.0</commons-io.version>
+        <rocketmq-spring-boot-starter.version>2.3.1</rocketmq-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +111,12 @@
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-spring-boot-starter.version}</version>
             </dependency>
 
             <dependency>
