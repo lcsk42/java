@@ -19,7 +19,7 @@ import java.io.IOException;
 
 @Slf4j
 @RestController
-@RequestMapping("admin-file")
+@RequestMapping("/admin-file")
 @Tag(description = "Admin File Management", name = "AdminFileController")
 public class AdminFileController {
 

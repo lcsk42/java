@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public final class CacheUtil {
 
-    private static final String SPLICING_OPERATOR = "_";
+    private static final String SPLICING_OPERATOR = ":";
 
     /**
      * Build a cache key by joining the provided keys with an underscore.

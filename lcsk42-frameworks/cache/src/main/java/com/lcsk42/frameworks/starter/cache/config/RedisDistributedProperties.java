@@ -3,6 +3,7 @@ package com.lcsk42.frameworks.starter.cache.config;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 @Data
@@ -19,7 +20,7 @@ public class RedisDistributedProperties {
     /**
      * Charset used for the key prefix
      */
-    private String prefixCharset = "UTF-8";
+    private String prefixCharset = StandardCharsets.UTF_8.name();
 
     /**
      * Default timeout for values

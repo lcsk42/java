@@ -44,4 +44,3 @@ framework:
     allow-list:
       - path: /lcsk42-*-service/v3/api-docs
       - path: /lcsk42-admin-service/**
-        method: GET
