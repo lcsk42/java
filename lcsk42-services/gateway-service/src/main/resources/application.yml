@@ -38,7 +38,6 @@ knife4j:
       enabled: true
       version: openapi3
 
-
 framework:
   gateway:
     allow-list:

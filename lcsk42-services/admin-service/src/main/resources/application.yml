@@ -23,7 +23,6 @@ spring:
         username: nacos
         password: nacos-password
 
-
 management:
   endpoints:
     web:
