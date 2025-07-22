@@ -88,6 +88,19 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * Constructs a failure response with a custom error message.
+     *
+     * @param errorMessage the error message to be included in the result.
+     * @return a failure result with the provided error message.
+     */
+    public static Result<Void> failure(String errorMessage) {
+        return Result.<Void>builder()
+                .code(BaseErrorCode.SERVICE_ERROR.code())
+                .message(errorMessage)
+                .build();
+    }
+
+    /**
      * Constructs a failure response based on a custom platform exception.
      *
      * @param abstractException the exception containing error details.

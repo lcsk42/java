@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @FieldNameConstants
 public class BasePO {
 
-    @TableField(value = "is_deleted")
+    @TableField(value = "is_deleted", fill = FieldFill.INSERT)
     private Boolean deleted;
 
     @TableField(fill = FieldFill.INSERT)

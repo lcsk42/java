@@ -23,6 +23,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.lcsk42</groupId>
+            <artifactId>lcsk42-mybatis-spring-boot-starter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>

@@ -31,13 +31,20 @@ public class PageResponse<T> implements IPage<T> {
     /**
      * Total
      */
-    private long total;
+    private long total = 0L;
 
     /**
      * Query data list
      */
     @SuppressWarnings("squid:S1948")
     private List<T> records = Collections.emptyList();
+
+    public static <T> PageResponse<T> of(long current, long size) {
+        return PageResponse.<T>builder()
+                .current(current)
+                .size(size)
+                .build();
+    }
 
     public PageResponse(long current, long size) {
         this(current, size, 0);

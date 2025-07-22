@@ -6,6 +6,11 @@ spring:
     name: lcsk42-admin-service
   profiles:
     active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lcsk42_admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root-password
   data:
     redis:
       host: localhost
@@ -18,15 +23,6 @@ spring:
         username: nacos
         password: nacos-password
 
-
-mybatis-plus:
-  global-config:
-    db-config:
-      logic-delete-field: is_deleted
-      logic-delete-value: 1
-      logic-not-delete-value: 0
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 management:
   endpoints:
@@ -46,3 +42,12 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

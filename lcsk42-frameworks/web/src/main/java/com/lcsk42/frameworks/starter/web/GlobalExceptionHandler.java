@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
     public Result<Void> defaultErrorHandler(HttpServletRequest request, Throwable throwable) {
         // Logs the uncaught exception.
         log.error(ERROR_LOG_TEMPLATE, request.getMethod(), getUrl(request), throwable.toString(), throwable);
-        return Result.failure().withRequestId(getRequestId(request));
+        return Result.failure(throwable.getMessage()).withRequestId(getRequestId(request));
     }
 
     /**

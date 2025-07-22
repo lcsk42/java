@@ -1,16 +1,20 @@
 package com.lcsk42.frameworks.starter.mybatis.page;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Pagination parameters
  */
 @Data
-@Builder
+@SuperBuilder
 @FieldNameConstants
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageRequest {
     /**
      * Current page.
@@ -24,7 +28,7 @@ public class PageRequest {
     @Builder.Default
     private Long size = 10L;
 
-    public Page<Void> page() {
-        return Page.of(current, size);
+    public <T> PageResponse<T> page() {
+        return PageResponse.of(current, size);
     }
 }
