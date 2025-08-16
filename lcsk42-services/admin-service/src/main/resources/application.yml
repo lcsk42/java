@@ -8,18 +8,18 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lcsk42_admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://local.lcsk42.com:3306/lcsk42_admin?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root-password
   data:
     redis:
-      host: localhost
+      host: local.lcsk42.com
       port: 6379
       password: redis-password
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: local.lcsk42.com:8848
         username: nacos
         password: nacos-password
 
@@ -52,7 +52,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 rocketmq:
-  name-server: localhost:9876
+  name-server: local.lcsk42.com:9876
   producer:
     group: lcsk42_admin-service_common-message-execute_pg
     send-message-timeout: 2000
