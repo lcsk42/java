@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Utility class for LocalDateTime conversions and operations.
@@ -81,5 +82,20 @@ public final class LocalDateTimeUtil {
             return null;
         }
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
+    }
+
+
+    /**
+     * Formatter for the basic ISO date format (yyyyMMdd) without separators.
+     * This follows the ISO-8601 extended date format but omits the hyphens.
+     * <p>
+     * Example: "20231225" for December 25, 2023.
+     *
+     * @see DateTimeFormatter#ISO_LOCAL_DATE
+     */
+    public static final DateTimeFormatter BASIC_ISO_DATE_FORMATTER;
+
+    static {
+        BASIC_ISO_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
     }
 }

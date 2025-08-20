@@ -13,7 +13,9 @@ public class MybatisPlusAutoConfiguration {
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
+        paginationInnerInterceptor.setMaxLimit(10_000L);
+        interceptor.addInnerInterceptor(paginationInnerInterceptor);
         return interceptor;
     }
 
