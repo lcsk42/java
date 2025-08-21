@@ -1,6 +1,6 @@
 package com.lcsk42.frameworks.starter.convention.exception;
 
-import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.errorcode.ErrorCode;
 
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class ServiceException extends AbstractException {
      * @param errorCode the associated error code.
      */
     public ServiceException(String message, Throwable throwable, ErrorCode errorCode) {
-        super(Optional.ofNullable(message).orElse(errorCode.message()), throwable, errorCode);
+        super(Optional.ofNullable(message).orElse(errorCode.getMessage()), throwable, errorCode);
     }
 
     /**

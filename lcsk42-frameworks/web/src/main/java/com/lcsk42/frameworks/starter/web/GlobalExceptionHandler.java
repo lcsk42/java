@@ -1,7 +1,7 @@
 package com.lcsk42.frameworks.starter.web;
 
 import com.lcsk42.frameworks.starter.base.constant.CustomHttpHeaderConstant;
-import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.AbstractException;
 import com.lcsk42.frameworks.starter.convention.result.Result;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
         log.error(ERROR_LOG_TEMPLATE, request.getMethod(), getUrl(request), exceptionStr);
 
         // Returns a failure result with the error code and message.
-        return Result.failure(BaseErrorCode.CLIENT_ERROR.code(), exceptionStr).withRequestId(getRequestId(request));
+        return Result.failure(BaseErrorCode.CLIENT_ERROR.getCode(), exceptionStr).withRequestId(getRequestId(request));
     }
 
     /**

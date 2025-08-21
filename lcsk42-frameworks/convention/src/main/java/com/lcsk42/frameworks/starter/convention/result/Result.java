@@ -1,6 +1,6 @@
 package com.lcsk42.frameworks.starter.convention.result;
 
-import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.AbstractException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -82,8 +82,8 @@ public class Result<T> implements Serializable {
      */
     public static Result<Void> failure() {
         return Result.<Void>builder()
-                .code(BaseErrorCode.SERVICE_ERROR.code())
-                .message(BaseErrorCode.SERVICE_ERROR.message())
+                .code(BaseErrorCode.SERVICE_ERROR.getCode())
+                .message(BaseErrorCode.SERVICE_ERROR.getMessage())
                 .build();
     }
 
@@ -95,7 +95,7 @@ public class Result<T> implements Serializable {
      */
     public static Result<Void> failure(String errorMessage) {
         return Result.<Void>builder()
-                .code(BaseErrorCode.SERVICE_ERROR.code())
+                .code(BaseErrorCode.SERVICE_ERROR.getCode())
                 .message(errorMessage)
                 .build();
     }
@@ -108,9 +108,9 @@ public class Result<T> implements Serializable {
      */
     public static Result<Void> failure(AbstractException abstractException) {
         String errorCode = Optional.ofNullable(abstractException.getErrorCode())
-                .orElse(BaseErrorCode.SERVICE_ERROR.code());
+                .orElse(BaseErrorCode.SERVICE_ERROR.getCode());
         String errorMessage = Optional.ofNullable(abstractException.getErrorMessage())
-                .orElse(BaseErrorCode.SERVICE_ERROR.message());
+                .orElse(BaseErrorCode.SERVICE_ERROR.getMessage());
         return Result.<Void>builder()
                 .code(errorCode)
                 .message(errorMessage)

@@ -7,7 +7,7 @@ import com.lcsk42.biz.admin.domain.dto.AdminInfoPageDTO;
 import com.lcsk42.biz.admin.domain.po.AdminInfoPO;
 import com.lcsk42.biz.admin.domain.vo.AdminInfoVO;
 import com.lcsk42.biz.admin.service.AdminInfoService;
-import com.lcsk42.frameworks.starter.convention.exception.sql.RecordNotFoundException;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.SqlErrorCode;
 import com.lcsk42.frameworks.starter.mybatis.page.PageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,7 +41,7 @@ public class AdminInfoController {
     public AdminInfoVO get(@RequestParam("id") Long id) {
         return Optional.ofNullable(adminInfoService.getById(id))
                 .map(AdminInfoConverter.INSTANCE::toV)
-                .orElseThrow(RecordNotFoundException::new);
+                .orElseThrow(SqlErrorCode.RECORD_NOT_FOUND_EXCEPTION::toException);
     }
 
     @GetMapping("/page")

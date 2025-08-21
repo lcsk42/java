@@ -1,6 +1,6 @@
 package com.lcsk42.frameworks.starter.web.feign;
 
-import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.ServiceException;
 import com.lcsk42.frameworks.starter.convention.result.Result;
 import feign.Response;

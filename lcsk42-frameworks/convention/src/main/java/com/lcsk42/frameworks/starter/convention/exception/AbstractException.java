@@ -31,7 +31,7 @@ public abstract class AbstractException extends RuntimeException {
      */
     protected AbstractException(String message, Throwable throwable, ErrorCode errorCode) {
         super(message, throwable);
-        this.errorCode = errorCode.code();
-        this.errorMessage = StringUtils.hasLength(message) ? message : errorCode.message();
+        this.errorCode = errorCode.getCode();
+        this.errorMessage = StringUtils.hasLength(message) ? message : errorCode.getMessage();
     }
 }

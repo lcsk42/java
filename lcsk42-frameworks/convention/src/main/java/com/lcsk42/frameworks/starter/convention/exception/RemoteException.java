@@ -1,6 +1,6 @@
 package com.lcsk42.frameworks.starter.convention.exception;
 
-import com.lcsk42.frameworks.starter.convention.errorcode.BaseErrorCode;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.BaseErrorCode;
 import com.lcsk42.frameworks.starter.convention.errorcode.ErrorCode;
 
 /**
