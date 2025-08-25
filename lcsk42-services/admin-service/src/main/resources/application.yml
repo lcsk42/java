@@ -58,3 +58,16 @@ rocketmq:
     send-message-timeout: 2000
     retry-times-when-send-failed: 1
     retry-times-when-send-async-failed: 1
+
+framework:
+  file:
+    upload:
+      file-upload-type: s3
+      endpoint: https://rustfs.astrafluxtech.com/
+      access-key-id: JaCu4n3rvxFDmHX9WweZ
+      access-key-secret: PytvmOw1ARZKBnVH5hYUE9SeLpjXbkM4o8IzgcNF
+      bucket-name: lcsk42
+      region: us-west-2
+      extra:
+        public-bucket-name: lcsk42-public
+

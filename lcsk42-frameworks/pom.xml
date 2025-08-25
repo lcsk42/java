@@ -20,5 +20,6 @@
         <module>mybatis</module>
         <module>bizs</module>
         <module>rocketmq</module>
+        <module>file</module>
     </modules>
 </project>

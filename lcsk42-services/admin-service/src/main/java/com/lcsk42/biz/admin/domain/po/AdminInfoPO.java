@@ -8,12 +8,17 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.lcsk42.frameworks.starter.mybatis.po.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("admin_info")
 public class AdminInfoPO extends BasePO {
 

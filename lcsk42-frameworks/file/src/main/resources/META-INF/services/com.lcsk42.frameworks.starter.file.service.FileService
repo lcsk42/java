@@ -1,0 +1,4 @@
+com.lcsk42.frameworks.starter.file.service.impl.FtpFileService
+com.lcsk42.frameworks.starter.file.service.impl.LocalFileService
+com.lcsk42.frameworks.starter.file.service.impl.OssFileService
+com.lcsk42.frameworks.starter.file.service.impl.S3FileService
