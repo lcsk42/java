@@ -10,7 +10,7 @@ public enum BusinessDomainEnum {
     COMMON("Common Module"),
     FEIGN("Feign Module"),
     SQL("SQL Module"),
-    ADMIN_FILE("Admin File Module"),
+    FILE("File Module"),
     ;
     private final String description;
 }

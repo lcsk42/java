@@ -36,8 +36,8 @@ public class OssFileService implements FileService {
         this.ossClient = OSSClientBuilder.create()
                 .endpoint(properties.getEndpoint())
                 .credentialsProvider(CredentialsProviderFactory.newDefaultCredentialProvider(
-                        getUploadProperties().getAccessKeyId(),
-                        getUploadProperties().getAccessKeySecret()
+                        properties.getAccessKeyId(),
+                        properties.getAccessKeySecret()
                 ))
                 .clientConfiguration(clientBuilderConfiguration)
                 .build();
@@ -114,11 +114,13 @@ public class OssFileService implements FileService {
                                           String bucketName,
                                           Duration signatureDuration) {
         GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, key, HttpMethod.PUT);
-        request.setExpiration( Date.from(
-                LocalDateTime.now()
-                        .plus(signatureDuration)
-                        .atZone(ZoneId.systemDefault())
-                        .toInstant()));
+        request.setExpiration(
+                Date.from(
+                        LocalDateTime.now()
+                                .plus(signatureDuration)
+                                .atZone(ZoneId.systemDefault())
+                                .toInstant())
+        );
         return ossClient.generatePresignedUrl(request);
     }
 }

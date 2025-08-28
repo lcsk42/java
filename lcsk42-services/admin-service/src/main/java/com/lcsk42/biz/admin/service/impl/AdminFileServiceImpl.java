@@ -8,26 +8,23 @@ import com.lcsk42.biz.admin.enums.BizSourceEnum;
 import com.lcsk42.biz.admin.mapper.AdminFileMapper;
 import com.lcsk42.biz.admin.service.AdminFileService;
 import com.lcsk42.frameworks.starter.common.util.IdUtil;
+import com.lcsk42.frameworks.starter.convention.errorcode.impl.FileErrorCode;
 import com.lcsk42.frameworks.starter.convention.exception.ServiceException;
 import com.lcsk42.frameworks.starter.file.config.FileUploadProperties;
 import com.lcsk42.frameworks.starter.file.service.FileService;
 import com.lcsk42.frameworks.starter.mybatis.service.impl.ServiceImpl;
+import com.lcsk42.frameworks.starter.web.util.ServletUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
@@ -149,26 +146,9 @@ public class AdminFileServiceImpl extends ServiceImpl<AdminFileMapper, AdminFile
         AdminFileVO adminFileVO = getById(id);
 
         try (InputStream inputStream = fileService.downloadFile(adminFileVO.getPath(), adminFileVO.getBucketName())) {
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                    ContentDisposition
-                            .attachment()
-                            .filename(adminFileVO.getName())
-                            .build()
-                            .toString()
-            );
-            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-            response.setHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(adminFileVO.getSize()));
-
-            OutputStream outputStream = response.getOutputStream();
-
-            IOUtils.copy(inputStream, outputStream);
-
-            outputStream.flush();
-            IOUtils.closeQuietly(inputStream);
-            IOUtils.closeQuietly(outputStream);
+            ServletUtil.write(response, inputStream, adminFileVO.getName(), MediaType.APPLICATION_OCTET_STREAM_VALUE);
         } catch (IOException e) {
-            throw new ServiceException();
+            throw FileErrorCode.IO_RUNTIME_EXCEPTION.toException();
         }
 
     }

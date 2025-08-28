@@ -69,6 +69,7 @@ public interface FileService {
 
         return (temporary ? TMP_DIR : StringUtils.EMPTY)
                 + generateDateBasedDirectory()
+                + StringConstant.SLASH
                 + Instant.now().getEpochSecond()
                 + StringConstant.DASHED
                 + fileName;
