@@ -1,4 +1,4 @@
-package com.lcsk42.biz.admin.convert;
+package com.lcsk42.biz.admin.domain.convert;
 
 import com.lcsk42.biz.admin.domain.dto.AdminInfoDTO;
 import com.lcsk42.biz.admin.domain.po.AdminInfoPO;

@@ -1,7 +1,7 @@
 package com.lcsk42.biz.admin.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.lcsk42.biz.admin.convert.AdminInfoConverter;
+import com.lcsk42.biz.admin.domain.convert.AdminInfoConverter;
 import com.lcsk42.biz.admin.domain.dto.AdminInfoDTO;
 import com.lcsk42.biz.admin.domain.dto.AdminInfoPageDTO;
 import com.lcsk42.biz.admin.domain.po.AdminInfoPO;

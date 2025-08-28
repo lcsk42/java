@@ -1,5 +1,6 @@
-package com.lcsk42.biz.admin.enums;
+package com.lcsk42.biz.admin.common.enums;
 
+import com.lcsk42.frameworks.starter.convention.enums.BaseEnum;
 import jakarta.annotation.Nonnull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class StringToBizSourceEnumConverter implements Converter<String, BizSourceEnum> {
     @Override
     public BizSourceEnum convert(@Nonnull String name) {
-        return BizSourceEnum.fromName(name);
+        return BaseEnum.fromValue(name, BizSourceEnum.class);
     }
 }

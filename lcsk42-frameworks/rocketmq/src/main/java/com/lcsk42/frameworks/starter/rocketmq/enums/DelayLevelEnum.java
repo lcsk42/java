@@ -1,17 +1,12 @@
 package com.lcsk42.frameworks.starter.rocketmq.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.lcsk42.frameworks.starter.convention.enums.BaseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 @Getter
 @AllArgsConstructor
-public enum DelayLevelEnum {
+public enum DelayLevelEnum implements BaseEnum<Integer> {
     LEVEL_0S(0, "0s"),
     LEVEL_1S(1, "1s"),
     LEVEL_5S(2, "5s"),
@@ -33,27 +28,6 @@ public enum DelayLevelEnum {
     LEVEL_2H(18, "2h"),
     ;
 
-    private final int level;
+    private final Integer value;
     private final String description;
-
-    private static final Map<Integer, DelayLevelEnum> VALUE_MAP =
-            Stream.of(values()).collect(Collectors.toMap(DelayLevelEnum::getLevel, Function.identity()));
-
-    @JsonCreator
-    public static DelayLevelEnum from(String value) {
-        if (value == null) {
-            return LEVEL_0S;
-        }
-        for (DelayLevelEnum e : values()) {
-            if (e.name().equalsIgnoreCase(value)) {
-                return e;
-            }
-        }
-        try {
-            int intValue = Integer.parseInt(value);
-            return VALUE_MAP.getOrDefault(intValue, LEVEL_0S);
-        } catch (NumberFormatException ignored) {
-        }
-        return LEVEL_0S;
-    }
 }

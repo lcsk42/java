@@ -1,4 +1,4 @@
-package com.lcsk42.biz.admin.exception;
+package com.lcsk42.biz.admin.common.exception;
 
 import com.lcsk42.frameworks.starter.convention.enums.BusinessDomainEnum;
 import com.lcsk42.frameworks.starter.convention.enums.ErrorSourceEnum;

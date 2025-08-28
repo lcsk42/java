@@ -126,7 +126,7 @@ public interface ErrorCode {
      * @return formatted error code string
      */
     default String getCode() {
-        return getErrorSourceEnum().getSourceCode() + "-" + getBusinessDomainEnum().name() + "-" + getErrorNumber();
+        return getErrorSourceEnum().getValue() + "-" + getBusinessDomainEnum().name() + "-" + getErrorNumber();
     }
 
     /**

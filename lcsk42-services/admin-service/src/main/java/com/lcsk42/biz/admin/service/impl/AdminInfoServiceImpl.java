@@ -1,6 +1,6 @@
 package com.lcsk42.biz.admin.service.impl;
 
-import com.lcsk42.biz.admin.convert.AdminInfoConverter;
+import com.lcsk42.biz.admin.domain.convert.AdminInfoConverter;
 import com.lcsk42.biz.admin.domain.dto.AdminInfoDTO;
 import com.lcsk42.biz.admin.domain.po.AdminInfoPO;
 import com.lcsk42.biz.admin.domain.vo.AdminInfoVO;

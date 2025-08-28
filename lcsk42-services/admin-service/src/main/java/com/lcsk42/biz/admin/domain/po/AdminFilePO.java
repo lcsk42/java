@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.lcsk42.biz.admin.enums.BizSourceEnum;
+import com.lcsk42.biz.admin.common.enums.BizSourceEnum;
 import com.lcsk42.frameworks.starter.file.enums.FileUploadType;
 import com.lcsk42.frameworks.starter.mybatis.po.BasePO;
 import io.swagger.v3.oas.annotations.media.Schema;

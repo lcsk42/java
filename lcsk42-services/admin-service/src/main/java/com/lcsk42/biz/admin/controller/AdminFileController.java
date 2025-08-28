@@ -1,8 +1,8 @@
 package com.lcsk42.biz.admin.controller;
 
+import com.lcsk42.biz.admin.common.enums.BizSourceEnum;
 import com.lcsk42.biz.admin.domain.dto.AdminFileMetadataDTO;
 import com.lcsk42.biz.admin.domain.vo.AdminFileVO;
-import com.lcsk42.biz.admin.enums.BizSourceEnum;
 import com.lcsk42.biz.admin.service.AdminFileService;
 import com.lcsk42.frameworks.starter.common.util.IdUtil;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,6 +1,6 @@
 package com.lcsk42.biz.admin.mq.consumer;
 
-import com.lcsk42.biz.admin.constant.AdminRocketMQConstant;
+import com.lcsk42.biz.admin.common.constant.AdminRocketMQConstant;
 import com.lcsk42.biz.admin.mq.event.GenerallyEvent;
 import com.lcsk42.frameworks.starter.rocketmq.domain.MessageWrapper;
 import lombok.extern.slf4j.Slf4j;

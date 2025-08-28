@@ -1,4 +1,4 @@
-package com.lcsk42.biz.admin.constant;
+package com.lcsk42.biz.admin.common.constant;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,7 @@ package com.lcsk42.biz.admin.service;
 import com.lcsk42.biz.admin.domain.dto.AdminFileMetadataDTO;
 import com.lcsk42.biz.admin.domain.po.AdminFilePO;
 import com.lcsk42.biz.admin.domain.vo.AdminFileVO;
-import com.lcsk42.biz.admin.enums.BizSourceEnum;
+import com.lcsk42.biz.admin.common.enums.BizSourceEnum;
 import com.lcsk42.frameworks.starter.mybatis.service.IService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;

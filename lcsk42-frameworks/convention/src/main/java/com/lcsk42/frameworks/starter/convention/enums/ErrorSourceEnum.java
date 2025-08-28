@@ -9,25 +9,27 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ErrorSourceEnum {
+public enum ErrorSourceEnum implements BaseEnum<String> {
     /**
      * Error originated from the client application or input.
      */
-    CLIENT("C"),
+    CLIENT("C", "Client"),
 
     /**
      * Error originated from a remote system or external service.
      */
-    REMOTE("R"),
+    REMOTE("R", "Remote"),
 
     /**
      * Error originated within our own service.
      */
-    SERVICE("S");
+    SERVICE("S", "Service");
 
     /**
      * The standardized code representing this error source.
      * Used for concise identification in logs and error responses.
      */
-    private final String sourceCode;
+    private final String value;
+
+    private final String description;
 }

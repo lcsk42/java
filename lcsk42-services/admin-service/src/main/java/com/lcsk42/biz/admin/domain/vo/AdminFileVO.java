@@ -1,6 +1,6 @@
 package com.lcsk42.biz.admin.domain.vo;
 
-import com.lcsk42.biz.admin.enums.BizSourceEnum;
+import com.lcsk42.biz.admin.common.enums.BizSourceEnum;
 import com.lcsk42.frameworks.starter.file.enums.FileUploadType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
